@@ -13,6 +13,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
 
     <style>
+        body {
+            background: linear-gradient(40deg, rgb(119, 4, 4), rgba(4, 4, 44), rgb(2, 13, 58));
+            margin: 0;
+            padding: 0;
+        }
+
         .card .badge:hover {
             background-color: var(--mdb-danger) !important;
         }
@@ -52,8 +58,8 @@
 
                         <!-- Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Superhero Hunter JS
+                            <a class="nav-link text-primary fw-bold text-uppercase" href="#">
+                                My Superheros
                             </a>
                         </li>
 
@@ -61,40 +67,27 @@
 
                     <!-- Icons -->
                     <ul class="navbar-nav d-flex flex-row me-1">
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#"><i class="fas fa-heart" title="My favourite superheroes"></i></a>
+                        <li class="nav-item me-3 me-lg-0 text-center">
+                            <a class="nav-link" href="./my-favourite-superheros.html"><i
+                                    class="fas fa-heart fa-2x text-danger" title="My favourite superheroes"></i>
+                                <small class="d-block text-primary fw-medium">My Favourites</small></a>
                         </li>
                     </ul>
-
                 </div>
             </div>
             <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
 
-        <div class="p-3">
-            <h4 class="fw-bold mt-3">All Characters (<span id="allCharacters">0</span>)</h4>
-            <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                    aria-describedby="search-addon" />
-                <button type="button" class="btn btn-outline-primary">search</button>
+        <div class="row mx-0 mt-5 justify-content-center">
+            <div class="col-md-10 col-12">
+                <div class="d-grid gap-5 justify-content-center my-3" id="all-lists"
+                    style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                </div>
             </div>
-
         </div>
 
-        <div class="sticky-bottom bg-white p-2 border-top">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </div>
+
     </div>
 
     <!-- Javascript -->
@@ -115,14 +108,149 @@
         }
 
         window.onload = () => {
-            // alert('Information!!!\nThis site can store details in browser for a max of 10 days period.');
-
-            // fetchAPI('characters')
-            //     .then(data => console.log(data));
+            fetchAPI('characters').then(data => console.log(data));
         }
     </script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+    <script>
+        var favourities = [];
+        var allList = document.getElementById('all-lists');
+        var searchSuperhoero = document.getElementById('serach-superhero');
+        var searchButton = document.getElementById('search-btn');
+        var pageNo = 1;
+        var limit = 25;
+
+        window.onload = () => {
+            refreshFavourities();
+            showSuperHeroDetails();
+        }
+        // Recieving the query parameters from the URL.
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('id');
+
+        // Showing each detial of the superhero.
+        async function showSuperHeroDetails() {
+            var response = await fetchAPI('characters/' + myParam);
+            // console.log(response);
+            cleanAllCards();
+            response.data.results.forEach((character) => {
+                addCard(character);
+            })
+        }
+
+        async function fetchAPI(url, parameters = null) {
+            var time = new Date().getTime();
+            var privateKey = '599c9aecd5204118e08dad89d81fd7134c990407';
+            var publicKey = 'a754f4d46d02fe7d9d507f3ae025c821';
+            // console.log('Calling API ...');
+
+            var url = `https://gateway.marvel.com:443/v1/public/${url}?ts=${time}&apikey=${publicKey}&hash=${CryptoJS.MD5(time + privateKey + publicKey)}`;
+            if (parameters) url += `&${parameters}`;
+
+            console.log('using URL - ' + url);
+            return await fetch(url)
+                .then(response => response.json())
+                .catch(error => error.json());
+        }
+
+        function cleanAllCards() {
+            document.querySelectorAll('.card').forEach(element => {
+                element.remove();
+            });
+        }
+
+        // console.log(searchQuery);
+        var searchResults = "";
+        searchButton.addEventListener('click', async () => {
+            searchResults = await fetchAPI('characters', `nameStartsWith=${searchSuperhoero.value}`);
+            // console.log(searchResults);
+            cleanAllCards();
+            for (item of searchResults.data.results) {
+                addCard(item);
+            }
+        });
+
+        function addCard(item) {
+            console.log(item);
+            var allComics = [];
+            var allStories = [];
+            let is_favourite = favourities.includes('' + item.id);
+            // all comic list of specific(requested id) character.
+            allComics = item.comics.items.map((comic) => {
+                return `<div class='shadow m-1 p-3'>${comic.name}</div>`;
+            })
+            // all story list of specific(requested id) character.
+            allStories = item.stories.items.map((story) => {
+                return `<div class='shadow m-1 p-3'>${story.name}</div>`;
+            })
+            // console.log(allComics);
+            allList.insertAdjacentHTML('beforeend', `<div class="card">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="wdith:100%;">
+                        <img src="${item.thumbnail.path}.${item.thumbnail.extension}" class="img-fluid" width="100%" height="200px" style="object-fit:cover" />
+                        <a href="superhero.html?id=${item.id}">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-decoration-underline text-primary">My Superhero Name</h5>
+                        <p class="mt-3">${item.title || "No Title Available"}</p>
+                        <h5 class="card-title text-decoration-underline text-primary">Description</h5>
+                        <p class="mt-3">${item.description || "No Description Available"}</p>
+                        <h5 class="mt-3 mb-0 text-decoration-underline text-primary"><b>Comics</b></h5>
+                        <div class="d-flex justify-space-between align-items-center flex-wrap gap-3">${allComics.join('') || "No Description Available"}</div>
+                        <h5 class="card-title mt-3 text-decoration-underline text-primary">Stories</h5>
+                        <div class="d-flex justify-space-between align-items-center flex-wrap gap-3">${item.stories.available + " stories are available" || "No Description Available"}</div>
+                       
+                    </div>
+                    <span
+                        class="position-absolute top-0 end-0 badge border bg-white text-black rounded-circle p-2 m-2 ${is_favourite ? 'favourite' : ''}" onclick="toggleFavourite(this, ${item.id})" title="Add to favourite">
+                        <i class="far fa-heart fa-lg" style="fill: var(--mdb-white);"></i>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </div>`);
+        }
+
+        function refreshFavourities() {
+            favourities = (getCookie('favourities') || '').split(',');
+            if (favourities == '') favourities = [];
+        }
+
+        function toggleFavourite(ele, characterId) {
+            characterId = '' + characterId;
+            if (favourities.includes(characterId)) {
+                favourities.splice(favourities.indexOf(characterId), 1);
+                ele.classList.remove('favourite');
+            } else {
+                favourities.push(characterId);
+                ele.classList.add('favourite');
+            }
+
+            setCookie("favourities", favourities);
+            console.log(favourities);
+        }
+
+        function setCookie(name, value, days = null) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
 </body>
 
 </html>

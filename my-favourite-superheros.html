@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Ninjas</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+    <!-- CSS Animation AOS CDN link -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- CDN link -  for AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(40deg, rgb(119, 4, 4), rgba(4, 4, 44), rgb(2, 13, 58));
+            margin: 0;
+            padding: 0;
+        }
+
+        .card .badge:hover {
+            background-color: var(--mdb-danger) !important;
+        }
+
+        .card .badge.favourite {
+            background-color: var(--mdb-danger) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand bg-light navbar-light sticky-top">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="logo">
+                    <svg width="130" height="52" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect fill="#EC1D24" width="100%" height="100%"></rect>
+                        <path fill="#FEFEFE"
+                            d="M126.222 40.059v7.906H111.58V4h7.885v36.059h6.757zm-62.564-14.5c-.61.294-1.248.44-1.87.442v-14.14h.04c.622-.005 5.264.184 5.264 6.993 0 3.559-1.58 5.804-3.434 6.705zM40.55 34.24l2.183-18.799 2.265 18.799H40.55zm69.655-22.215V4.007H87.879l-3.675 26.779-3.63-26.78h-8.052l.901 7.15c-.928-1.832-4.224-7.15-11.48-7.15-.047-.002-8.06 0-8.06 0l-.031 39.032-5.868-39.031-10.545-.005-6.072 40.44.002-40.435H21.278L17.64 26.724 14.096 4.006H4v43.966h7.95V26.78l3.618 21.192h4.226l3.565-21.192v21.192h15.327l.928-6.762h6.17l.927 6.762 15.047.008h.01v-.008h.02V33.702l1.845-.27 3.817 14.55h7.784l-.002-.01h.022l-5.011-17.048c2.538-1.88 5.406-6.644 4.643-11.203v-.002C74.894 19.777 79.615 48 79.615 48l9.256-.027 6.327-39.85v39.85h15.007v-7.908h-7.124v-10.08h7.124v-8.03h-7.124v-9.931h7.124z">
+                        </path>
+                        <path fill="#EC1D24" d="M0 0h30v52H0z"></path>
+                        <path fill="#FEFEFE"
+                            d="M31.5 48V4H21.291l-3.64 22.735L14.102 4H4v44h8V26.792L15.577 48h4.229l3.568-21.208V48z">
+                        </path>
+                    </svg>
+                </div>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto me-auto mb-lg-0">
+
+                        <!-- Link -->
+                        <li class="nav-item">
+                            <a class="nav-link text-primary fw-bold text-uppercase" href="/">
+                                My Superheros
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Icons -->
+                    <ul class="navbar-nav d-flex flex-row me-1">
+                        <li class="nav-item me-3 me-lg-0 text-center">
+                            <a class="nav-link" href="./my-favourite-superheros.html"><i
+                                    class="fas fa-heart fa-2x text-danger" title="My favourite superheroes"></i>
+                                <small class="d-block text-primary fw-medium">My Favourites</small></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <div class="p-3">
+            <div class="row mx-0 justify-content-center">
+                <div class="col-md-10 col-12">
+                    <h4 class="fw-bold mt-3 text-white text-uppercase">My Favourite Characters </h4>
+                    <div class="input-group">
+                        <input type="search" class="form-control rounded-end-0 py-4 border-4 border-end-0"
+                            id="serach-superhero" placeholder="Search your superhero eg.bat, iron" aria-label="Search"
+                            aria-describedby="search-addon" />
+                        <button type="button" class="btn btn-outline-danger  bg-danger text-white"
+                            id="search-btn">search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mx-0 mt-5 justify-content-center">
+                <div class="col-md-10 col-12">
+                    <div class="d-grid gap-5 justify-content-center my-3" id="all-lists"
+                        style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script>
+
+        var allList = document.getElementById('all-lists');
+        var searchSuperhoero = document.getElementById('serach-superhero');
+        var searchButton = document.getElementById('search-btn');
+        var favourities = [];
+
+        window.onload = () => {
+            console.log(document.cookie);
+            console.log(getCookie('favourities'));
+            refreshFavourities();
+            console.log(favourities);
+            loadFavouriteCharacters();
+        }
+
+        async function fetchAPI(url, parameters = null) {
+            var time = new Date().getTime();
+            var privateKey = '599c9aecd5204118e08dad89d81fd7134c990407';
+            var publicKey = 'a754f4d46d02fe7d9d507f3ae025c821';
+            // console.log('Calling API ...');
+
+            var url = `https://gateway.marvel.com:443/v1/public/${url}?ts=${time}&apikey=${publicKey}&hash=${CryptoJS.MD5(time + privateKey + publicKey)}`;
+            if (parameters) url += `&${parameters}`;
+
+            console.log('using URL - ' + url);
+            return await fetch(url)
+                .then(response => response.json())
+                .catch(error => error.json());
+        }
+        // Loading all favourite charcaters stores in cookies.
+        async function loadFavouriteCharacters() {
+            // console.log(favourities);
+            cleanAllCards();
+            for (var characterId of favourities) {
+                let response = await fetchAPI(`characters/${characterId}`);
+                addCard(response.data.results[0])
+                console.log(response);
+            }
+        }
+
+        function cleanAllCards() {
+            document.querySelectorAll('.card').forEach(element => {
+                element.remove();
+            });
+        }
+
+        var searchResults = "";
+        searchButton.addEventListener('click', async () => {
+            searchResults = await fetchAPI('characters', `nameStartsWith=${searchSuperhoero.value}`);
+            console.log(searchResults);
+            cleanAllCards();
+            for (item of searchResults.data.results) {
+                addCard(item);
+            }
+        });
+        function addCard(item) {
+            let is_favourite = favourities.includes('' + item.id);
+            allList.insertAdjacentHTML('beforeend', `<div class="card" data-aos="zoom-in"
+     data-aos-easing="linear"
+     data-aos-duration="1000">
+     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="wdith:100%;height:300px">
+                        <img src="${item.thumbnail.path}.${item.thumbnail.extension}" class="img-fluid" width="100%" height="100%" />
+                        <a href="superhero.html?id=${item.id}">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name}</h5>
+                    </div>
+                    <span
+                        class="position-absolute top-0 end-0 badge border bg-white text-black rounded-circle p-2 m-2 ${is_favourite ? 'favourite' : ''}" onclick="toggleFavourite(this, ${item.id})" title="Add to favourite">
+                        <i class="far fa-heart fa-lg" style="fill: var(--mdb-white);"></i>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </div>`);
+        }
+
+        function refreshFavourities() {
+            favourities = (getCookie('favourities') || '').split(',');
+            if (favourities == '') favourities = [];
+        }
+
+        function toggleFavourite(ele, characterId) {
+            characterId = '' + characterId;
+            if (favourities.includes(characterId)) {
+                favourities.splice(favourities.indexOf(characterId), 1);
+                ele.classList.remove('favourite');
+            } else {
+                favourities.push(characterId);
+                ele.classList.add('favourite');
+            }
+
+            setCookie("favourities", favourities);
+            console.log('toggeling cookie' + favourities);
+        }
+
+        function setCookie(name, value, days = null) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+    <!-- MDB -->
+    <script>
+        AOS.init();
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+</body>
+
+</html>

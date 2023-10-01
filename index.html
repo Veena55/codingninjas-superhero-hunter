@@ -11,10 +11,28 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+    <!-- CSS Animation AOS CDN link -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- CDN link -  for AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <style>
+        body {
+            background: linear-gradient(40deg, rgb(119, 4, 4), rgba(4, 4, 44), rgb(2, 13, 58));
+            margin: 0;
+            padding: 0;
+        }
+
         .card .badge:hover {
             background-color: var(--mdb-danger) !important;
+        }
+
+        .card .badge.favourite {
+            background-color: var(--mdb-danger) !important;
+        }
+
+        .pagination-bar {
+            background: linear-gradient(40deg, rgba(4, 4, 44), rgb(119, 4, 4), rgb(2, 13, 58));
         }
     </style>
 </head>
@@ -45,24 +63,23 @@
                         </path>
                     </svg>
                 </div>
-
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto me-auto mb-lg-0">
-
                         <!-- Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Superhero Hunter JS
+                            <a class="nav-link text-primary fw-bold text-uppercase" href="#">
+                                My Superheros
                             </a>
                         </li>
 
                     </ul>
-
                     <!-- Icons -->
                     <ul class="navbar-nav d-flex flex-row me-1">
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#"><i class="fas fa-heart" title="My favourite superheroes"></i></a>
+                        <li class="nav-item me-3 me-lg-0 text-center">
+                            <a class="nav-link" href="./my-favourite-superheros.html"><i
+                                    class="fas fa-heart fa-2x text-danger" title="My favourite superheroes"></i>
+                                <small class="d-block text-primary fw-medium">My Favourites</small></a>
                         </li>
                     </ul>
 
@@ -71,176 +88,176 @@
             <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
-
         <div class="p-3">
-            <h4 class="fw-bold mt-3">All Characters (<span id="allCharacters">0</span>)</h4>
-            <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                    aria-describedby="search-addon" />
-                <button type="button" class="btn btn-outline-primary">search</button>
-            </div>
+            <div class="row mx-0 justify-content-center">
+                <div class="col-md-10 col-12">
+                    <h4 class="fw-bold mt-3 text-white text-uppercase">All Characters</h4>
+                    <div class="input-group mt-2">
+                        <input type="search" class="form-control rounded-end-0 py-4 border-4 border-end-0"
+                            id="serach-superhero" placeholder="Search your superhero eg.bat, iron" aria-label="Search"
+                            aria-describedby="search-addon" />
+                        <button type="button" class="btn btn-outline-danger  bg-danger text-white"
+                            id="search-btn">search</button>
+                    </div>
 
-            <div class="d-grid gap-3 my-3" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                    <span
-                        class="position-absolute top-0 end-0 badge border bg-white text-black rounded-circle p-2 m-2" title="Add to favourite">
-                        <i class="far fa-heart fa-lg" style="fill: var(--mdb-white);"></i>
-                        <span class="visually-hidden">unread messages</span>
-                    </span>
                 </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+            <div class="row mx-0 mt-5 justify-content-center">
+                <div class="col-md-10 col-12">
+                    <div class="d-grid gap-5 justify-content-center my-3" id="all-lists"
+                        style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="sticky-bottom bg-white p-2 border-top">
+        <div class="sticky-bottom pagination-bar pt-3 pb-1">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link btn border border-danger text-white" onclick="changePage(-1);">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link btn mx-4 border border-primary text-white" onclick="changePage(+1);">Next</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <!-- Javascript -->
+    <!-- CDN link for crypto js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <script>
-        async function fetchAPI(url) {
-            console.log('Calling API ...');
+        var favourities = [];
+        var allList = document.getElementById('all-lists');
+        var searchSuperhoero = document.getElementById('serach-superhero');
+        var searchButton = document.getElementById('search-btn');
+        var pageNo = 1;
+        var limit = 25;
+
+        window.onload = () => {
+            refreshFavourities();
+            loadHomePage(); // function call to load all characters
+        }
+
+        // Function created for pagination (previous,next button)
+        function changePage(direction) {
+            if (direction < 1) {
+                --pageNo;
+                if (pageNo < 1) pageNo = 1;
+            } else {
+                ++pageNo;
+            }
+            loadHomePage();
+        }
+
+        async function loadHomePage() {
+            // sending request as per the page no. and limits to get the characters.
+            var response = await fetchAPI('characters', `offset=${(pageNo - 1) * limit}&limit=${limit}`);
+            cleanAllCards(); // removing cards for search results
+            response.data.results.forEach((character) => {
+                addCard(character);
+            })
+        }
+
+        async function fetchAPI(url, parameters = null) {
             var time = new Date().getTime();
             var privateKey = '599c9aecd5204118e08dad89d81fd7134c990407';
             var publicKey = 'a754f4d46d02fe7d9d507f3ae025c821';
+            // console.log('Calling API ...');
 
             var url = `https://gateway.marvel.com:443/v1/public/${url}?ts=${time}&apikey=${publicKey}&hash=${CryptoJS.MD5(time + privateKey + publicKey)}`;
+            if (parameters) url += `&${parameters}`;
 
+            console.log('using URL - ' + url);
             return await fetch(url)
                 .then(response => response.json())
                 .catch(error => error.json());
         }
+        // Function ccreated to clean/remove the cards to display search results
+        function cleanAllCards() {
+            document.querySelectorAll('.card').forEach(element => {
+                element.remove();
+            });
+        }
 
-        window.onload = () => {
-            // alert('Information!!!\nThis site can store details in browser for a max of 10 days period.');
+        var searchResults = "";
+        // Event-listener called to search charcater thats entered in the searchbox.
+        searchButton.addEventListener('click', async () => {
+            // nameStartsWith helps to send the request at the api endpoint using any starting charcaters. We need not to type whole character name eg. batman=>bat,ironman=>iron 
+            searchResults = await fetchAPI('characters', `nameStartsWith=${searchSuperhoero.value}`);
 
-            // fetchAPI('characters')
-            //     .then(data => console.log(data));
+            cleanAllCards();
+            for (item of searchResults.data.results) {
+                addCard(item);
+            }
+        });
+        // This fucntion created to display CARD ui display. It is created as reusable(dynamic).
+        function addCard(item) {
+            let is_favourite = favourities.includes('' + item.id);
+            allList.insertAdjacentHTML('beforeend', `<div class="card" data-aos="zoom-in"
+     data-aos-easing="linear"
+     data-aos-duration="1000">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="wdith:100%;height:300px">
+                        <img src="${item.thumbnail.path}.${item.thumbnail.extension}" class="img-fluid" width="100%" height="100%" />
+                        <a href="superhero.html?id=${item.id}">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name}</h5>
+                    </div>
+                    <span
+                        class="position-absolute top-0 end-0 badge border bg-white text-black rounded-circle p-2 m-2 ${is_favourite ? 'favourite' : ''}" onclick="toggleFavourite(this, ${item.id})" title="Add to favourite">
+                        <i class="far fa-heart fa-lg" style="fill: var(--mdb-white);"></i>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </div>`);
+        }
+        // Cookies get refreshed for favourites foreach request.
+        function refreshFavourities() {
+            favourities = (getCookie('favourities') || '').split(',');
+            if (favourities == '') favourities = [];
+        }
+        // add or remove favourites on clicking heart icon.
+        function toggleFavourite(ele, characterId) {
+            characterId = '' + characterId;
+            if (favourities.includes(characterId)) {
+                favourities.splice(favourities.indexOf(characterId), 1);
+                ele.classList.remove('favourite');
+            } else {
+                favourities.push(characterId);
+                ele.classList.add('favourite');
+            }
+
+            setCookie("favourities", favourities);
+            console.log(favourities);
+        }
+        // setcookie is created to save the cookie. (Reusable function)
+        function setCookie(name, value, days = null) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        // Receive the cookie data
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
         }
     </script>
     <!-- MDB -->
+    <script>
+        AOS.init();
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
 </body>
 
